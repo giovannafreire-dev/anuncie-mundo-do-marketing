@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Briefing recebido — Mundo do Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #291059;
+      --purple-1:  #5F34A5;
+      --purple-2:  #9836F8;
+      --pink:      #E040A0;
+      --white:     #fff;
+      --text-muted: rgba(255,255,255,.6);
+    }
+
+    html, body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ---------- background orbs ---------- */
+    .orbs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orbs::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      top: -15%; left: -10%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(152,54,248,.35), transparent 70%);
+      filter: blur(40px);
+    }
+    .orbs::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      bottom: -10%; right: -10%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(171,110,209,.3), transparent 70%);
+      filter: blur(40px);
+    }
+
+    /* ---------- topbar ---------- */
+    .topbar {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
+    .topbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .topbar-logo img { height: 22px; filter: brightness(0) invert(1); }
+    .topbar-badge {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: var(--purple-2);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .topbar-cta {
+      padding: 9px 20px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,.25);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .topbar-cta:hover { border-color: var(--purple-2); background: rgba(152,54,248,.12); }
+
+    /* ---------- main ---------- */
+    main {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 80px);
+      padding: 40px 24px 60px;
+      text-align: center;
+    }
+
+    /* check circle */
+    .check-wrap {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 36px;
+      box-shadow: 0 0 48px rgba(152,54,248,.5);
+      animation: pop .5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .check-wrap svg { width: 36px; height: 36px; }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+      animation: fadeUp .5s .15s ease both;
+    }
+    h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, #C970FF, var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 460px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+      animation: fadeUp .5s .25s ease both;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp .5s .35s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+      color: var(--white);
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+      box-shadow: 0 4px 24px rgba(152,54,248,.4);
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,.22);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .btn-ghost:hover { border-color: var(--purple-2); background: rgba(152,54,248,.1); transform: translateY(-1px); }
+
+    /* divider */
+    .divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,.15);
+      margin: 48px auto 32px;
+      animation: fadeUp .5s .45s ease both;
+    }
+
+    .footer-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      animation: fadeUp .5s .5s ease both;
+    }
+    .footer-note a { color: rgba(255,255,255,.75); text-decoration: underline; text-underline-offset: 3px; }
+    .footer-note a:hover { color: var(--white); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .topbar { padding: 18px 20px; }
+      .actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orbs" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="topbar-logo" href="/">
+      <img src="/assets/logos/logo-extenso-preto.svg" alt="Mundo do Marketing" />
+      <span class="topbar-badge">Anuncie</span>
+    </a>
+    <a class="topbar-cta" href="/">Voltar ao início</a>
+  </header>
+
+  <main>
+    <div class="check-wrap" aria-hidden="true">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 18.5L14.5 25.5L28 11" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Briefing <em>recebido</em></h1>
+
+    <p class="subtitle">
+      Nosso time de planejamento está analisando,<br>
+      retornaremos em breve.
+    </p>
+
+    <div class="actions">
+      <a class="btn-primary" href="https://mundodomarketing.com.br" target="_blank" rel="noopener">
+        Explorar o Mundo do Marketing →
+      </a>
+      <a class="btn-ghost" href="/">
+        Nova solicitação
+      </a>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <p class="footer-note">
+      Resposta em até 1 dia útil &nbsp;·&nbsp;
+      <a href="mailto:comercial@mundodomarketing.com.br">comercial@mundodomarketing.com.br</a>
+    </p>
+  </main>
+</body>
+</html>
