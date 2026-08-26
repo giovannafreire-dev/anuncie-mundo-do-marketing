@@ -1,0 +1,5 @@
+# robots.txt - Mundo do Marketing (Anuncie)
+User-agent: *
+Allow: /
+
+Sitemap: https://projetos.mundodomarketing.com.br/sitemap.xml
